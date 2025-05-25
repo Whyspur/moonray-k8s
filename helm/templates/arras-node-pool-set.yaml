@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: arras-node-pool
+spec:
+  selector:
+    matchLabels:
+      role: arras-node
+  replicas: {{ Values.arrasNode.numMachines }}
+  serviceName: "arras-set-service"
+  template:
+    metadata:
+      labels:
+        role: arras-node
+    spec:
+        containers:
+        - name: arras-node-instance
+        image: {{ Values.arrasNode.image }}
+        command: ["arras4_node"]
+        args: ["--coordinator-host #REPLACE", "--coordinator-port 8888", "-l 5", "--no-consul"]
+            resources:
+            requests:
+                memory: {{ Values.arrasNode.instanceMinimumMemory }}
+                cpu: {{ Values.arrasNode.instanceMinimumCPUs }}
+            limits:
+                memory: {{ Values.arrasNode.instanceMaximumMemory }}
+                cpu: {{ Values.arrasNode.instanceMaximumCPUs }}
+
+
+
+
+            

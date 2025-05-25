@@ -1,0 +1,13 @@
+arrasCoordinator:
+  image: #PLACEHOLDER
+
+arrasNode:
+  image: #PLACEHOLDER
+  # This can be scaled up or down after deployment
+  numMachines: 3
+  instanceMinimumMemory: "2Gi"
+  instanceMinimumCPUs: 2
+  # This is strongly recommended to be capped. Moonray does not constrain memory or CPU consumption.
+  # Kubernetes will try to keep scaling the pods to keep up which may lead to unexpected behavior.
+  instanceMaximumMemory: "4Gi"
+  instanceMaximumCPUs: 4
