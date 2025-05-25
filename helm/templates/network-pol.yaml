@@ -1,0 +1,69 @@
+# Allow nodes to communicate with coordinator
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: arras-node-to-coordinator
+  namespace: {{ .Values.namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      app: arras-node
+  policyTypes:
+  - Ingress
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: arras-coordinator
+    ports:
+    - protocol: TCP
+      port: {{ .Values.coordinator.port }}
+  - to:
+    - namespaceSelector: {}
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+
+---
+# Allow coordinator to receive from nodes and external traffic
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: arras-coordinator-ingress
+  namespace: {{ .Values.namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      app: arras-coordinator
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: arras-node
+    ports:
+    - protocol: TCP
+      port: {{ .Values.coordinator.port }}
+  # From LB
+  - from: []
+    ports:
+    - protocol: TCP
+      port: {{ .Values.coordinator.port }}
+
+---
+# Deny all
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: {{ .Values.namespace }}
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress

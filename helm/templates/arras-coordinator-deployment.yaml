@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "moonray-arras.fullname" . }}-coordinator
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.coordinator.replicas }}
+  selector:
+    matchLabels:
+      app: arras-coordinator
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: arras-coordinator
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: coordinator
+        image: {{ .Values.coordinator.image }}
+        ports:
+        - containerPort: {{ .Values.coordinator.port }}
+        resources:
+{{ toYaml .Values.coordinator.resources | indent 10 }}

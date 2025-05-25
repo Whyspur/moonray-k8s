@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: arras-coordinator-depl
+spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        role: arras-coordinator
+    template:
+      metadata:
+        labels:
+          role: arras-coordinator
+      spec:
+        containers:
+        - name: arras-coordinator-instance
+                # PLACEHOLDER - replace with coordinator img
+          image: docker pull baravdish/moonray-build:cpu
+                # This will break unless image start directory is fixed
+          command: ["python"]
+          args: ["-i", "run.py"]
+          ports:
+          - containerPort: 8888
+        nodeSelector:
+          kubernetes.io/hostname: pool-hs8alce53-tbyv6 # PLACEHOLDER REPLACE
+

@@ -1,13 +1,27 @@
-arrasCoordinator:
-  image: #PLACEHOLDER
+namespace: moonray
 
-arrasNode:
-  image: #PLACEHOLDER
-  # This can be scaled up or down after deployment
-  numMachines: 3
-  instanceMinimumMemory: "2Gi"
-  instanceMinimumCPUs: 2
-  # This is strongly recommended to be capped. Moonray does not constrain memory or CPU consumption.
-  # Kubernetes will try to keep scaling the pods to keep up which may lead to unexpected behavior.
-  instanceMaximumMemory: "4Gi"
-  instanceMaximumCPUs: 4
+coordinator:
+  image: whyspur/coordv1:latest
+  replicas: 1
+  port: 8888
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "1"
+    limits:
+      memory: "2Gi"
+      cpu: "1"
+
+node:
+  image: your-registry/arras-node:latest
+  replicas: 3
+  resources:
+    requests:
+      memory: "8Gi"
+      cpu: "1"
+    limits:
+      memory: "8Gi"
+      cpu: "1"
+  # Additional node configuration
+  logLevel: 5
+  noConsul: true
