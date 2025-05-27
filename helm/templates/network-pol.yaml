@@ -18,7 +18,7 @@ spec:
           app: arras-coordinator
     ports:
     - protocol: TCP
-      port: {{ .Values.coordinator.port }}
+      port: 8888
   - to:
     - namespaceSelector: {}
       podSelector:
@@ -48,22 +48,9 @@ spec:
           app: arras-node
     ports:
     - protocol: TCP
-      port: {{ .Values.coordinator.port }}
+      port: 8888
   # From LB
   - from: []
     ports:
     - protocol: TCP
-      port: {{ .Values.coordinator.port }}
-
----
-# Deny all
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: default-deny-all
-  namespace: {{ .Values.namespace }}
-spec:
-  podSelector: {}
-  policyTypes:
-  - Ingress
-  - Egress
+      port: 8888
