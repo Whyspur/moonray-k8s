@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "moonray-arras.fullname" . }}-coordinator
+  name: arras-coordinator
   namespace: {{ .Values.namespace }}
   annotations:
 {{ toYaml .Values.service.annotations | indent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: ClusterIP
   selector:
-    app: arras-coordinator
+    role: arras-coordinator
     release: {{ .Release.Name }}
   ports:
-  - port: {{ .Values.coordinator.port }}
-    targetPort: {{ .Values.coordinator.port }}
+  - port: 8888
+    targetPort: 8888
     protocol: TCP

@@ -3,7 +3,8 @@ namespace: moonray
 coordinator:
   image: whyspur/coordv1:latest
   replicas: 1
-  port: 8888
+  # Requests and Limits should match to keep the pods in Guaranteed QOS Class
+  # Above may be ignored if nodes have no competing services running on them
   resources:
     requests:
       memory: "1Gi"
@@ -11,17 +12,20 @@ coordinator:
     limits:
       memory: "2Gi"
       cpu: "1"
-
 node:
   image: your-registry/arras-node:latest
   replicas: 3
+  # Requests and Limits should match to keep the pods in Guaranteed QOS Class
+  # Above may be ignored if nodes have no competing services running on them
   resources:
     requests:
+      # Ensure this is at least what the memoryMB assigned in your arras .sessiondef is
+      # https://docs.openmoonray.org/developer-reference/arras/arras-session-definitions/#requirements
       memory: "8Gi"
       cpu: "1"
     limits:
       memory: "8Gi"
       cpu: "1"
-  # Additional node configuration
+  # Maximum Log Verbosity
   logLevel: 5
   noConsul: true

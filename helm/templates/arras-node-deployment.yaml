@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "moonray-arras.fullname" . }}-node
+  name: arras-node
   namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.node.replicas }}
   selector:
     matchLabels:
-      app: arras-node
+      role: arras-node
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: arras-node
+        role: arras-node
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -21,9 +21,9 @@ spec:
         command:
         - arras4_node
         - --coordinator-host
-        - {{ include "moonray-arras.fullname" . }}-coordinator
+        - arras-coordinator
         - --coordinator-port
-        - "{{ .Values.coordinator.port }}"
+        - 8888
         - -l
         - "{{ .Values.node.logLevel }}"
         - --no-consul
