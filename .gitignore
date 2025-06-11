@@ -1,0 +1,46 @@
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Exclude all .tfvars files
+*.tfvars
+*.tfvars.json
+
+# Ignore override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Terraform Plan files
+*.tfplan
+*.plan
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# SSH Keys and Certificates
+*.key
+
+# Ignore any local testing files
+*.local
+*.test
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
