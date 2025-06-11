@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: arras-coordinator
+  name: arras-coordinator-svc
   namespace: {{ .Values.namespace }}
   annotations:
 {{ toYaml .Values.service.annotations | indent 4 }}
 spec:
   type: ClusterIP
   selector:
-    role: arras-coordinator
+    role: arras-coordinator-svc
     release: {{ .Release.Name }}
   ports:
   - port: 8888
