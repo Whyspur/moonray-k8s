@@ -72,14 +72,30 @@ kubectl port-forward deployment/arras-coordinator 8888:8888 -n moonray
 
 Change to the root directory of your Moonray release
 
+### Validate .sessiondef configuration in /sessions folder
+If you're using the example sessiondef (mcrt_progressive):
+- Update resources.memoryMB to 8000.0 if you're using all default values in this repo.
+
+If you've changed the default Azure image used by Terraform:
+- Update helm/values.yaml to have an appropriate node count figuring 2vcpu 4gb per replica
+
 Export required ENV
 
 export PATH=${PWD}/bin:${PATH}  
 export RDL2_DSO_PATH=${PWD}/rdl2dso.proxy  
 export ARRAS_SESSION_PATH=${PWD}/sessions
 
-If you're using the example sessiondef (mcrt_progressive) make sure you update resources.memoryMB to 8000.0 if you're using all default values in this repo.
+
+### Run Arras Headless
+
+Where 
+- --rdl is your input file
+- --exr is your output render
+- -s mcrt_progressive is the name of the .sessiondef file which **must** be located in /sessions directory.
+- --num-mcrt is the number of arras_nodes you've chosen to run. This repo defaults to 3
 
 ```
-arras_render --host localhost --port 8888 --rdl rectangle.rdla -s mcrt_progressive --num-mcrt 3 --current-env
+arras_render --host localhost --port 8888 --rdl rectangle.rdla --exr rectangle.exr -s mcrt_progressive --num-mcrt 3 --current-env --no-gui
 ```
+
+
