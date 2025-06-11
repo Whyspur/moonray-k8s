@@ -27,10 +27,5 @@ spec:
         - -l
         - "{{ .Values.node.logLevel }}"
         - --no-consul
-        env:
-        - name: PATH
-          value: "/installs/moonray-renderer/bin:$PATH"
-        - name: RDL2_DSO_PATH
-          value: "/installs/moonray-renderer/rdl2dso:/installs/moonray-renderer/rdl2dso.proxy"
         resources:
 {{ toYaml .Values.node.resources | indent 10 }}
