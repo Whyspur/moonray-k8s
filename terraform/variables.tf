@@ -6,7 +6,7 @@ variable "resource_group_location" {
 
 variable "resource_group_name_prefix" {
   type        = string
-  default     = "rg"
+  default     = "moonray-rg"
   description = "Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription."
 }
 
@@ -19,7 +19,7 @@ variable "node_count" {
 variable "vm_size" {
     type        = string
     description = "The Azure VM Size name for individual nodes in the cluster"
-    default     = 
+    default     = "standard_f2ams_v6"
 }
 
 variable "msi_id" {
@@ -31,5 +31,5 @@ variable "msi_id" {
 variable "username" {
   type        = string
   description = "The admin username for the new cluster."
-  default     = "azureadmin"
+  default     = "moonrayadmin"
 }
