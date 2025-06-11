@@ -46,6 +46,12 @@ terraform init
 terraform apply
 ```
 
+When you're done using the cluster
+
+```
+terraform destroy
+```
+
 ### Set your Kubeconfig
 
 Export your Kubeconfig somewhere from Terraform
@@ -96,6 +102,13 @@ Where
 
 ```
 arras_render --host localhost --port 8888 --rdl rectangle.rdla --exr rectangle.exr -s mcrt_progressive --num-mcrt 3 --current-env --no-gui
+```
+
+**Remember to destroy your cluster when you're done using it to avoid excessive billing costs**
+
+cd terraform
+```
+terraform destroy
 ```
 
 
