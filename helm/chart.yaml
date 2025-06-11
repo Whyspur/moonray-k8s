@@ -1,0 +1,17 @@
+apiVersion: v2
+name: Moonray-Arras
+description: A Helm chart for deploying Arras Coordinator and Arras Node services for the Moonray Renderer's Distributed Rendering mode
+type: application
+
+version: 0.1.0
+appVersion: "1.0.0"
+
+sources:
+  - https://github.com/whyspur/moonray-k8s
+
+keywords:
+  - moonray
+  - arras
+  - renderer
+
+kubeVersion: ">=1.32.0-0"
