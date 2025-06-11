@@ -36,10 +36,50 @@ az ad sp create-for-rbac --role="Contributor" -scopes="/subscriptions/id-copied-
 
 ## Deploy Cluster with Terraform
 
+Make sure you're in the Terraform directory.
+
+```
+terraform init
+```
+
+```
+terraform apply
+```
+
 ### Set your Kubeconfig
 
+Export your Kubeconfig somewhere from Terraform
+
+```
+echo "$(terraform output kube_config)" > ~/azurek8s
+```
+
+Open the azurek8s file and remove << EOT from the start and EOT from the end
+
+Export your kubeconfig
+
+```
+export KUBECONFIG=~/azurek8s
+```
 
 ## Port-Forward to access Coordinator from Localhost
 
+```
+kubectl port-forward deployment/arras-coordinator 8888:8888 -n moonray
+```
 
 ## Start a Render Job
+
+Change to the root directory of your Moonray release
+
+Export required ENV
+
+export PATH=${PWD}/bin:${PATH}
+export RDL2_DSO_PATH=${PWD}/rdl2dso.proxy
+export ARRAS_SESSION_PATH=${PWD}/sessions
+
+If you're using the example sessiondef (mcrt_progressive) make sure you update resources.memoryMB to 8000.0 if you're using all default values in this repo.
+
+```
+arras_render --host localhost --port 8888 --rdl rectangle.rdla -s mcrt_progressive --num-mcrt 3 --current-env
+```
