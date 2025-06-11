@@ -18,14 +18,12 @@ spec:
       containers:
       - name: node
         image: {{ .Values.node.image }}
-        command:
+        args:
         - arras4_node
         - --coordinator-host
         - arras-coordinator
         - --coordinator-port
-        - 8888
+        - "8888"
         - -l
-        - "{{ .Values.node.logLevel }}"
+        - "5"
         - --no-consul
-        resources:
-{{ toYaml .Values.node.resources | indent 10 }}
