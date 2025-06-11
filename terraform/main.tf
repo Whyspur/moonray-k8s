@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "random_pet" "azurerm_kubernetes_cluster_name" {
-  prefix = "cluster"
+  prefix = "moonray-cluster"
 }
 
 resource "random_pet" "azurerm_kubernetes_cluster_dns_prefix" {
