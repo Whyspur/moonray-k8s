@@ -74,8 +74,8 @@ Change to the root directory of your Moonray release
 
 Export required ENV
 
-export PATH=${PWD}/bin:${PATH}
-export RDL2_DSO_PATH=${PWD}/rdl2dso.proxy
+export PATH=${PWD}/bin:${PATH}  
+export RDL2_DSO_PATH=${PWD}/rdl2dso.proxy  
 export ARRAS_SESSION_PATH=${PWD}/sessions
 
 If you're using the example sessiondef (mcrt_progressive) make sure you update resources.memoryMB to 8000.0 if you're using all default values in this repo.
