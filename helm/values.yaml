@@ -7,7 +7,7 @@ coordinator:
   # Above may be ignored if nodes have no competing services running on them
   resources:
     requests:
-      memory: "1Gi"
+      memory: "2Gi"
       cpu: "1"
     limits:
       memory: "2Gi"
@@ -17,15 +17,15 @@ node:
   replicas: 3
   # Requests and Limits should match to keep the pods in Guaranteed QOS Class
   # Above may be ignored if nodes have no competing services running on them
-  resources:
-    requests:
-      # Ensure this is at least what the memoryMB assigned in your arras .sessiondef is
-      # https://docs.openmoonray.org/developer-reference/arras/arras-session-definitions/#requirements
-      memory: "8Gi"
-      cpu: "2"
-    limits:
-      memory: "8Gi"
-      cpu: "2"
-  # Maximum Log Verbosity
-  logLevel: 5
-  noConsul: true
+  # resources:
+  #   requests:
+  #     # Ensure this is at least what the memoryMB assigned in your arras .sessiondef is
+  #     # https://docs.openmoonray.org/developer-reference/arras/arras-session-definitions/#requirements
+  #     memory: "8Gi"
+  #     cpu: "2"
+  #   limits:
+  #     memory: "8Gi"
+  #     cpu: "2"
+  # # Maximum Log Verbosity
+  # logLevel: 5
+  # noConsul: true
