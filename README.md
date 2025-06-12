@@ -127,7 +127,7 @@ Scale the size of the Azure VM's and increase the Kubernetes Arras Node Deployme
 
 It's entirely possible to use this repo as a way to deploy infrastruce running one arras node (pod) per Azure VM. Alternatively one may choose to get very larger Azure VM's and run multiple arras node pods per VM. The latter is the way Kubernetes is generally intended to be used, but without testing it's hard to say if one is better than the other for this use case.
 
-**Arras .sessiondef**
+### Arras .sessiondef
 
 Arras uses sessiondef configs to specify various options including memory and cpu values. If a target node does not have available memory in the amount defined, it will not receive new jobs until such time as that much memory is available. This can lead to a case where your deployed arras node containers are sized too small relative to the amount of memory/cpu defined in the .sessiondef.
 
